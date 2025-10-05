@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maxi Délices - Rapporteur d’Affaires</title>
+<style>
+  /* Reset et base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff7f0;
+    color: #4b2e05;
+    line-height: 1.5;
+  }
+  a {
+    text-decoration: none;
+    color:  #dfd8d3;
+  }
+  a:hover {
+    color: #f08000;
+  }
+
+  /* Entête */
+  header {
+    position: relative;
+    height: 60vh;
+    min-height: 350px;
+    background: url('images/gaufre-2.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    color: white;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* background: rgba(75, 46, 5, 0.6); */
+    z-index: 0;
+  }
+  .logo {
+    position: relative;
+    z-index: 1;
+  }
+  .logo img {
+    height: 120px;  /* très grand */
+    object-fit: contain;
+    display: block;
+    border: 4px solid #d46200;
+    border-radius: 12px;
+    box-shadow: 0 0 18px 3px rgba(212, 98, 0, 0.8);
+    animation: logo-oscillate 4s ease-in-out infinite, border-pulse 3.5s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes logo-oscillate {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(4deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    75% {
+      transform: rotate(-4deg);
+    }
+  }
+  @keyframes border-pulse {
+    0%, 100% {
+      box-shadow: 0 0 18px 3px rgba(212, 98, 0, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 28px 6px rgba(255, 130, 0, 1);
+    }
+  }
+
+  nav {
+    position: relative;
+    z-index: 1;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav li {
+    font-weight: 600;
+  }
+
+  /* Hamburger menu pour mobile */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 2;
+  }
+  .hamburger div {
+    width: 28px;
+    height: 3px;
+    background-color: #f08000;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Menu mobile */
+  @media (max-width: 768px) {
+    nav ul {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: #4b2e05;
+      flex-direction: column;
+      width: 200px;
+      padding: 1rem;
+      gap: 1.2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      border-radius: 0 0 0 10px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    nav ul.active {
+      transform: translateX(0);
+    }
+    nav li a {
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  /* Section principale */
+  main {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+    gap: 2rem;
+    animation: fadeInText 1.2s ease forwards;
+    flex-direction: column;
+    color: #4b2e05;
+  }
+  @keyframes fadeInText {
+    from {opacity: 0; transform: translateX(-20px);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+
+  .texte-principal {
+    flex: 1;
+  }
+  .texte-principal h1, .texte-principal h2, .texte-principal h3 {
+    color: #d46200;
+    margin-bottom: 0.8rem;
+  }
+  .texte-principal h1 {
+    font-size: 2.4rem;
+  }
+  .texte-principal h2 {
+    font-size: 1.8rem;
+  }
+  .texte-principal h3 {
+    font-size: 1.3rem;
+    margin-top: 1.2rem;
+  }
+  .texte-principal p, .texte-principal ul, .texte-principal blockquote {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .texte-principal ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+  }
+  .texte-principal blockquote {
+    border-left: 4px solid #d46200;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #6b4a1a;
+    margin: 1rem 0;
+  }
+
+  /* Footer */
+  footer {
+    background: #4b2e05;
+    color: #fff3e0;
+    padding: 2rem 1rem;
+  }
+  .footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  .footer-section {
+    flex: 1 1 220px;
+  }
+  .footer-section h3 {
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #d46200;
+    padding-bottom: 0.5rem;
+  }
+  .footer-section ul {
+    list-style: none;
+  }
+  .footer-section li {
+    margin-bottom: 0.6rem;
+  }
+  .footer-section a {
+    color: #f5c27f;
+  }
+  .footer-section a:hover {
+    color: #ff9e1b;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="images/LOGO.jpg" alt="Logo Maxi Délices" />
+  </div>
+  <nav>
+    <ul id="menu">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="commande.html">Commande</a></li>
+      <li><a href="rapporteur.html">Rapporteur d'affaires</a></li>
+         <li><a href="Partenaires.html">Nos partenaires</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="texte-principal" aria-label="Rapporteur d’Affaires International">
+    <h1>Mohamed Ndiaye – Rapporteur d’Affaires International</h1>
+
+    <p>🤝 <strong>Un acteur clé de la coopération économique Sénégal - Diaspora - Monde</strong></p>
+    <p>Mohamed Ndiaye, Président Directeur Général de Maxi Délices, est bien plus qu’un entrepreneur : il est un pont entre les opportunités internationales et le développement local au Sénégal. Fort d’une présence active entre l’Europe (notamment la Belgique) et l’Afrique de l’Ouest, il agit depuis plusieurs années en tant que rapporteur d’affaires international, facilitant les connexions stratégiques entre les entreprises, les investisseurs et les institutions publiques ou privées.</p>
+
+    <h2>🎯 Son rôle en tant que rapporteur d’affaires</h2>
+    <ul>
+      <li>Identifier des opportunités économiques, commerciales ou industrielles à l'international pouvant bénéficier au marché sénégalais.</li>
+      <li>Créer des passerelles de collaboration entre les entrepreneurs de la diaspora et les acteurs locaux.</li>
+      <li>Mettre en relation les investisseurs étrangers avec des projets sérieux et porteurs au Sénégal.</li>
+      <li>Accompagner les partenaires dans leurs démarches (implantation, partenariat, logistique, formalités).</li>
+      <li>Promouvoir les talents, produits et savoir-faire sénégalais auprès des marchés étrangers.</li>
+    </ul>
+
+    <h2>📌 Actions concrètes et domaines d’intervention</h2>
+    <ul>
+      <li>Alimentation & Agro-industrie</li>
+      <li>Import-export de produits certifiés</li>
+      <li>Logistique internationale</li>
+      <li>Coopération entre PME européennes et africaines</li>
+      <li>Appui aux projets locaux à fort impact économique et social</li>
+    </ul>
+
+    <h2>🇸🇳 Engagement pour le Sénégal</h2>
+    <blockquote>
+      « Mon ambition est de voir le Sénégal tirer pleinement profit des ressources, des talents et des réseaux de sa diaspora. Chaque projet réussi est une victoire pour tout le pays. »<br>
+      — Mohamed Ndiaye
+    </blockquote>
+
+    <h2>📬 Vous souhaitez collaborer avec Mohamed Ndiaye ?</h2>
+    <p>Vous êtes une entreprise, un investisseur ou une institution à la recherche d’un intermédiaire fiable, compétent et ancré sur le terrain ?<br>
+    Contactez Monsieur Ndiaye dès aujourd’hui pour discuter d’une éventuelle collaboration ou mission spécifique.</p>
+    <p><strong>👉</strong> <a href="https://wa.me/221776775982" target="_blank">Contact WhatsApp</a> | <a href="mailto:contact@maxidelices.sn">contact@maxidelices.sn</a></p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-container" role="contentinfo">
+    <section class="footer-section" aria-labelledby="footer-about">
+      <h3 id="footer-about">À propos</h3>
+      <p>MAXI DÉLICES est une entreprise sénégalaise spécialisée dans la fabrication et la distribution de pâtisseries semi-finies et prêtes à consommer.</p>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-contact">
+      <h3 id="footer-contact">Contact</h3>
+      <ul>
+        <li>Email : <a href="mailto:contact@maxidelices.sn">contact@maxidelices.sn</a></li>
+        <li>Téléphone : +221 77 677 59 82 <br>0032466147020</li>
+        <li>Adresse : Dakar, Sénégal</li>
+      </ul>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-links">
+      <h3 id="footer-links">Liens utiles</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="produits.html">Produits</a></li>
+        <li><a href="commande.html">Commande</a></li>
+        <li><a href="rapporteur.html">Rapporteur</a></li>
+           <li><a href="Partenaires.html">Nos partenaires</a></li>
+      </ul>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-social">
+      <h3 id="footer-social">Réseaux sociaux</h3>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </section>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+    const expanded = hamburger.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', expanded);
+  });
+
+  hamburger.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      hamburger.click();
+    }
+  });
+</script>
+
+</body>
+</html>
+fl;lmk,vk kezkdfr jnhuhre jsdjoj 
+l

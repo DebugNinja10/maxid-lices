@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maxi Délices</title>
+<style>
+  /* Reset et base */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff7f0;
+    color: #4b2e05;
+    line-height: 1.5;
+  }
+  a {
+    text-decoration: none;
+    color: #dfd8d3;
+  }
+  a:hover {
+    color: #f08000;
+  }
+
+  /* Entête */
+  header {
+    position: relative;
+    height: 60vh;
+    min-height: 350px;
+    background: url('images/gaufre-2.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    color: white;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* background: rgba(238, 210, 171, 0.6); */
+    z-index: 0;
+  }
+  .logo {
+    position: relative;
+    z-index: 1;
+  }
+  .logo img {
+    height: 120px;  /* très grand */
+    object-fit: contain;
+    display: block;
+    border: 4px solid #d46200;
+    border-radius: 12px;
+    box-shadow: 0 0 18px 3px rgba(212, 98, 0, 0.8);
+    animation: logo-oscillate 4s ease-in-out infinite, border-pulse 3.5s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes logo-oscillate {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(4deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    75% {
+      transform: rotate(-4deg);
+    }
+  }
+  @keyframes border-pulse {
+    0%, 100% {
+      box-shadow: 0 0 18px 3px rgba(212, 98, 0, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 28px 6px rgba(255, 130, 0, 1);
+    }
+  }
+
+  nav {
+    position: relative;
+    z-index: 1;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav li {
+    font-weight: 600;
+  }
+
+  /* Hamburger menu pour mobile */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 2;
+  }
+  .hamburger div {
+    width: 28px;
+    height: 3px;
+    background-color: #f08000;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Menu mobile */
+  @media (max-width: 768px) {
+    nav ul {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: #4b2e05;
+      flex-direction: column;
+      width: 200px;
+      padding: 1rem;
+      gap: 1.2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      border-radius: 0 0 0 10px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    nav ul.active {
+      transform: translateX(0);
+    }
+    nav li a {
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  /* Section principale */
+  main {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+    gap: 2rem;
+    animation: fadeInText 1.2s ease forwards;
+  }
+  @keyframes fadeInText {
+    from {opacity: 0; transform: translateX(-20px);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+
+  .texte-principal {
+    flex: 1;
+    color: #4b2e05;
+  }
+  .texte-principal h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+    color: #d46200;
+  }
+  .texte-principal p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  .texte-principal p strong {
+    color: #a04100;
+  }
+
+  .images-droite {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: slideInImages 1.5s ease forwards;
+  }
+  @keyframes slideInImages {
+    from {opacity: 0; transform: translateX(20px);}
+    to {opacity: 1; transform: translateX(0);}
+  }
+  .images-droite img {
+    width: 300px;  /* taille réduite */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(180, 110, 30, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .images-droite img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(180, 110, 30, 0.7);
+  }
+  .ma-video {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(180, 110, 30, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+}
+
+.ma-video:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(180, 110, 30, 0.7);
+}
+
+
+  /* Footer */
+  footer {
+    background: #4b2e05;
+    color: #fff3e0;
+    padding: 2rem 1rem;
+  }
+  .footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  .footer-section {
+    flex: 1 1 220px;
+  }
+  .footer-section h3 {
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #d46200;
+    padding-bottom: 0.5rem;
+  }
+  .footer-section ul {
+    list-style: none;
+  }
+  .footer-section li {
+    margin-bottom: 0.6rem;
+  }
+  .footer-section a {
+    color: #f5c27f;
+  }
+  .footer-section a:hover {
+    color: #ff9e1b;
+  }
+
+  /* Responsive global */
+  @media (max-width: 900px) {
+    main {
+      flex-direction: column;
+    }
+    .images-droite {
+      flex-direction: row;
+      overflow-x: auto;
+    }
+    .images-droite img {
+      width: 300px;
+      flex-shrink: 0;
+    }
+  }
+  @media (max-width: 480px) {
+    header {
+      padding: 0 1rem;
+    }
+    .texte-principal h1 {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="images/LOGO.jpg"Logo Maxi Délices" />
+  </div>
+  <nav>
+    <ul id="menu">
+      <li><a href="#">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="commande.html">Commande</a></li>
+        <a href="rapporteur.html">Rapporteur d'affaires</a>
+           <li><a href="Partenaires.html">Nos partenaires</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="texte-principal" aria-label="Description Maxi Délices">
+    <h1> MAXI DÉLICES</h1>
+    <p>Le projet MAXI DÉLICES est porté par une entreprise du même nom, fondée en 2015, dirigée par Monsieur Mohamed Ndiaye, Président Directeur Général. Il s’agit d’une entreprise sénégalaise, implantée à la fois au Sénégal et dans la diaspora, avec son siège social basé en Belgique.</p>
+    <p>MAXI DÉLICES évolue dans le secteur de l’alimentation humaine, plus précisément dans la fabrication et la distribution de produits de pâtisserie semi-finis et finis tels que les gaufres, les donuts, les crêpes, et d’autres spécialités. L’objectif principal n’est pas de concurrencer les pâtissiers locaux, mais de compléter la chaîne de valeur agroalimentaire, en ciblant un segment encore peu exploité au Sénégal : la fabrication industrielle de pâtisseries prêtes à cuire ou prêtes à consommer.</p>
+    <p><strong>Un projet innovant au service du Sénégal</strong></p>
+    <p>MAXI DÉLICES a pour ambition de créer la première unité industrielle de fabrication de pâtes pâtissières prêtes à cuire au Sénégal. Ce projet se distingue par une approche moderne, flexible et inclusive, qui vise à :</p>
+    <ul>
+      <li>Fournir aux professionnels (hôtels, restaurants, fastfoods, cantines, boulangeries, etc.) des produits de qualité constante, prêts à l’emploi et faciles à stocker.</li>
+      <li>Mettre à disposition des revendeurs (formels et informels) une solution complète comprenant les pâtons congelés et des machines de cuisson adaptées, permettant ainsi une production rapide et efficace en tout lieu.</li>
+    </ul>
+    <p><strong>Distribution nationale et accessibilité</strong></p>
+    <p>Le projet prévoit la mise en place de points de vente fixes dans toutes les grandes villes du Sénégal, afin de permettre une commercialisation directe des produits finis (gaufres, donuts, crêpes…).</p>
+    <p>En parallèle, une stratégie de vente ambulante sera déployée dans les zones à forte affluence : marchés, gares routières, universités, événements publics, etc. Cette approche vise à offrir un accès facile aux produits à toute heure de la journée, notamment aux heures de pause et aux heures de pointe.</p>
+    <p><strong>Impact et vision à long terme</strong></p>
+    <p>En s’appuyant sur des matières premières de qualité, des procédés normalisés (certifiés Halal et HACCP), et une volonté d’innovation permanente, MAXI DÉLICES se positionne comme un acteur majeur du développement agroalimentaire au Sénégal. L’entreprise souhaite :</p>
+    <ul>
+      <li>Créer des emplois directs et indirects</li>
+      <li>Former des revendeurs locaux à la gestion, la cuisson et la commercialisation des produits</li>
+      <li>Renforcer les liens entre la diaspora et le tissu économique local</li>
+      <li>Et surtout, répondre à la demande croissante en produits alimentaires pratiques, sûrs et savoureux.</li>
+    </ul>
+    <p><strong>Conclusion</strong></p>
+    <p>MAXI DÉLICES, par son ancrage local et international, sa vision claire et ses produits de qualité, aspire à devenir une référence incontournable dans le domaine de la pâtisserie industrielle au Sénégal et en Afrique de l’Ouest.</p>
+  </section>
+  <aside class="images-droite" aria-label="Images Maxi Délices">
+    <!-- <img src="images/PRODUITS.jpg" alt="Gaufres délicieuses" /> -->
+    <img src="images/IMAGE 3.jpg" alt="Donuts gourmands" />
+    <!-- <img src="images/IMAGE 2.jpg" alt="Crêpes prêtes à consommer" /> -->
+     <video class="ma-video" src="videos/video1.mp4" autoplay muted loop controls></video>
+     
+
+
+  </aside>
+</main>
+
+<footer>
+  <div class="footer-container" role="contentinfo">
+    <section class="footer-section" aria-labelledby="footer-about">
+      <h3 id="footer-about">À propos</h3>
+      <p>MAXI DÉLICES est une entreprise sénégalaise spécialisée dans la fabrication et la distribution de pâtisseries semi-finies et prêtes à consommer.</p>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-contact">
+      <h3 id="footer-contact">Contact</h3>
+      <ul>
+        <li>Email : <a href="mailto:contact@maxidelices.sn">contact@maxidelices.sn</a></li>
+        <li>Téléphone : +221 77 677 59 82 <br>0032466147020</li>
+        <li>Adresse : Dakar, Sénégal</li>
+      </ul>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-links">
+      <h3 id="footer-links">Liens utiles</h3>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Produits</a></li>
+          <li><a href="commande.html">Commande</a></li>
+        <li><a href="#">Contact</a></li>
+           <li><a href="Partenaires.html">Nos partenaires</a></li>
+      </ul>
+    </section>
+    <section class="footer-section" aria-labelledby="footer-social">
+      <h3 id="footer-social">Réseaux sociaux</h3>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </section>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+    // Mise à jour aria-expanded pour accessibilité
+    const expanded = hamburger.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', expanded);
+  });
+
+  // Permet ouverture menu au clavier sur touche Enter ou Space
+  hamburger.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      hamburger.click();
+    }
+  });
+</script>
+
+</body>
+</html>
