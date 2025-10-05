@@ -23,7 +23,7 @@ Le site met en avant les gâteaux, pâtisseries et services de commande personna
 🔗 **Visiter le site :** [https://maxidelices.com](https://maxidelices.com)
 
 📸 *Aperçu du site :*  
-![Aperçu](./assets/screenshot-accueil.png)
+![Aperçu](vu1.png)
 
 ---
 
